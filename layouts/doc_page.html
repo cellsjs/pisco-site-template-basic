@@ -22,34 +22,121 @@
         <ul class="main_menu">
           {% for target in navs.main %}
             {% if target.name == currentTarget.name %}
-              {% for section in target.children %}
-                {% if section.type == "dir" and section.children.length > 0 %}
-                <li>
-                  <h4>{{ section.name | capitalize }}</h4>
-                  <ul class="submenu">
-                    {% for document in section.children %}
-                      <li>
-                        {% if document.file.nav_path == nav_path %}
-                        <a href="{{ rootPath }}{{ document.file.nav_path }}" class="selected">{{ document.file.title }}</a>
-                        {% else %}
-                        <a href="{{ rootPath }}{{ document.file.nav_path }}">{{ document.file.title }}</a>
-                        {% endif %}
-                      </li>
-                    {% endfor %}
-                  </ul>
-                </li>
-                {% else %}
-                <li>
-                  <h4>General</h4>
-                  {% if section.file.nav_path == nav_path %}
-                    <a href="{{rootPath}}{{section.file.nav_path}}" class="selected">{{ section.file.title | capitalize }}</a>
+            <li>
+              <h4>General</h4>
+              {% for document in target.children %}
+                {% if document.type != "dir" %}
+                  {% if doc.file.nav_path == nav_path %}
+                    <a href="{{rootPath}}{{document.file.nav_path}}" class="selected">{{ document.file.title | capitalize }}</a>
                   {% else %}
-
-                    <a href="{{rootPath}}{{section.file.nav_path}}">{{ section.file.title | capitalize }}</a>
-                {% endif %}
-                </li>
+                    <a href="{{rootPath}}{{document.file.nav_path}}">{{ document.file.title | capitalize }}</a>
+                  {% endif %}
                 {% endif %}
               {% endfor %}
+            </li>
+
+            <li>
+              <h4>Guides</h4>
+              <ul>
+              {% for section in target.children %}
+                {% if section.name == "guides" %}
+                  {% for document in section.children %}
+                  <li>
+                    {% if document.file.nav_path == nav_path %}
+                    <a href="{{ rootPath }}{{ document.file.nav_path }}" class="selected">{{ document.file.title }}</a>
+                    {% else %}
+                    <a href="{{ rootPath }}{{ document.file.nav_path }}">{{ document.file.title }}</a>
+                    {% endif %}
+                  </li>
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+              </ul>
+            </li>
+
+            <li>
+              <h4>Tutorials</h4>
+              <ul>
+              {% for section in target.children %}
+                {% if section.name == "tutorials" %}
+                  {% for document in section.children %}
+                  <li>
+                    {% if document.file.nav_path == nav_path %}
+                    <a href="{{ rootPath }}{{ document.file.nav_path }}" class="selected">{{ document.file.title }}</a>
+                    {% else %}
+                    <a href="{{ rootPath }}{{ document.file.nav_path }}">{{ document.file.title }}</a>
+                    {% endif %}
+                  </li>
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+              </ul>
+            </li>
+
+            {% if target.name == "users" %}
+            <li>
+              <h4>API</h4>
+              <h5>FLOWS</h5>
+              <ul>
+                {% for section in target.children %}
+                  {% if section.name == "documents" %}
+                    {% for subsection in section.children %}
+                      {% if subsection.name == "flows" %}
+                        {% for document in subsection.children %}
+                        <li>
+                          {% if document.file.nav_path == nav_path %}
+                          <a href="{{ rootPath }}{{ document.file.nav_path }}" class="selected">{{ document.file.title }}</a>
+                          {% else %}
+                          <a href="{{ rootPath }}{{ document.file.nav_path }}">{{ document.file.title }}</a>
+                          {% endif %}
+                        </li>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor%}
+                  {% endif %}
+                {% endfor %}
+              </ul>
+              <h5>STEPS</h5>
+              <ul>
+                {% for section in target.children %}
+                  {% if section.name == "documents" %}
+                    {% for subsection in section.children %}
+                      {% if subsection.name == "steps" %}
+                        {% for document in subsection.children %}
+                        <li>
+                          {% if document.file.nav_path == nav_path %}
+                          <a href="{{ rootPath }}{{ document.file.nav_path }}" class="selected">{{ document.file.title }}</a>
+                          {% else %}
+                          <a href="{{ rootPath }}{{ document.file.nav_path }}">{{ document.file.title }}</a>
+                          {% endif %}
+                        </li>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor%}
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </li>
+            {% else %}
+            <li>
+              <h4>Plugins</h4>
+              <ul>
+                {% for section in target.children %}
+                  {% if section.name == "documents" %}
+                    {% for document in section.children %}
+                    <li>
+                      {% if document.file.nav_path == nav_path %}
+                      <a href="{{ rootPath }}{{ document.file.nav_path }}" class="selected">{{ document.file.title }}</a>
+                      {% else %}
+                      <a href="{{ rootPath }}{{ document.file.nav_path }}">{{ document.file.title }}</a>
+                      {% endif %}
+                    </li>
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </li>
+            {% endif %}
             {% endif %}
           {% endfor %}
         </ul>
