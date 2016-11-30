@@ -409,6 +409,14 @@ a {
 				line-height: 18px;
 				margin: 40px 0 10px 0px;
 			}
+			.docs aside .main_menu > li h5 {
+				color: #adadad;
+				font-weight: bold;
+				font-size: 14px;
+				margin-left: 30px;
+				line-height: 14px;
+				margin-top: 20px;
+			}
 			.docs aside .main_menu > li a {
 				color: #8da273;
 				text-decoration: none;
