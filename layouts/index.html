@@ -23,8 +23,9 @@
       </div>
 
       <div class="actions">
-        <a class="action-button" href="{{rootPath}}"> Docs for users </a>
-        <a class="action-button" href="{{rootPath}}"> Docs for developers </a>
+        {% for target in targets %}
+          <a class="action-button" href="{{ rootPath }}{{ target }}/get_started.html"> Docs for {{ target }} </a>
+        {% endfor %}
       </div>
     </section>
   </body>
