@@ -1,0 +1,168 @@
+{% set currentTarget = breadcrumb_path[0] %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="{{rootPath}}css/main.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <section class="docs">
+      <aside>
+
+        <div class="logo">
+          <a href="/">
+            <i class="icon-piscosour"></i>
+            {{ toolName }}
+          </a>
+
+        </div>
+        <ul class="main_menu">
+          {% for target in navs.main %}
+            {% if target.name == currentTarget.name %}
+            <li>
+              <h4>General</h4>
+              {% for document in target.children %}
+                {% if document.type != "dir" %}
+                  {% if doc.file.nav_path == nav_path %}
+                    <a href="{{rootPath}}{{document.file.nav_path}}" class="selected">{{ document.file.title | capitalize }}</a>
+                  {% else %}
+                    <a href="{{rootPath}}{{document.file.nav_path}}">{{ document.file.title | capitalize }}</a>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </li>
+
+            <li>
+              <h4>Guides</h4>
+              <ul>
+              {% for section in target.children %}
+                {% if section.name == "guides" %}
+                  {% for document in section.children %}
+                  <li>
+                    {% if document.file.nav_path == nav_path %}
+                    <a href="{{ rootPath }}{{ document.file.nav_path }}" class="selected">{{ document.file.title }}</a>
+                    {% else %}
+                    <a href="{{ rootPath }}{{ document.file.nav_path }}">{{ document.file.title }}</a>
+                    {% endif %}
+                  </li>
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+              </ul>
+            </li>
+
+            <li>
+              <h4>Tutorials</h4>
+              <ul>
+              {% for section in target.children %}
+                {% if section.name == "tutorials" %}
+                  {% for document in section.children %}
+                  <li>
+                    {% if document.file.nav_path == nav_path %}
+                    <a href="{{ rootPath }}{{ document.file.nav_path }}" class="selected">{{ document.file.title }}</a>
+                    {% else %}
+                    <a href="{{ rootPath }}{{ document.file.nav_path }}">{{ document.file.title }}</a>
+                    {% endif %}
+                  </li>
+                  {% endfor %}
+                {% endif %}
+              {% endfor %}
+              </ul>
+            </li>
+
+            {% if target.name == "users" %}
+            <li>
+              <h4>API</h4>
+              <h5>FLOWS</h5>
+              <ul>
+                {% for section in target.children %}
+                  {% if section.name == "documents" %}
+                    {% for subsection in section.children %}
+                      {% if subsection.name == "flows" %}
+                        {% for document in subsection.children %}
+                        <li>
+                          {% if document.file.nav_path == nav_path %}
+                          <a href="{{ rootPath }}{{ document.file.nav_path }}" class="selected">{{ document.file.title }}</a>
+                          {% else %}
+                          <a href="{{ rootPath }}{{ document.file.nav_path }}">{{ document.file.title }}</a>
+                          {% endif %}
+                        </li>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor%}
+                  {% endif %}
+                {% endfor %}
+              </ul>
+              <h5>STEPS</h5>
+              <ul>
+                {% for section in target.children %}
+                  {% if section.name == "documents" %}
+                    {% for subsection in section.children %}
+                      {% if subsection.name == "steps" %}
+                        {% for document in subsection.children %}
+                        <li>
+                          {% if document.file.nav_path == nav_path %}
+                          <a href="{{ rootPath }}{{ document.file.nav_path }}" class="selected">{{ document.file.title }}</a>
+                          {% else %}
+                          <a href="{{ rootPath }}{{ document.file.nav_path }}">{{ document.file.title }}</a>
+                          {% endif %}
+                        </li>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor%}
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </li>
+            {% else %}
+            <li>
+              <h4>Plugins</h4>
+              <ul>
+                {% for section in target.children %}
+                  {% if section.name == "documents" %}
+                    {% for document in section.children %}
+                    <li>
+                      {% if document.file.nav_path == nav_path %}
+                      <a href="{{ rootPath }}{{ document.file.nav_path }}" class="selected">{{ document.file.title }}</a>
+                      {% else %}
+                      <a href="{{ rootPath }}{{ document.file.nav_path }}">{{ document.file.title }}</a>
+                      {% endif %}
+                    </li>
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </li>
+            {% endif %}
+            {% endif %}
+          {% endfor %}
+        </ul>
+
+        {% for target in navs.main %}
+          {% if target.type == 'dir' and target.name != currentTarget.name and isIn(target.name, targets) %}
+          <a href="{{rootPath}}{{ target.name }}/get_started.html"
+            class="switch_target">
+            Docs for {{ target.name }}
+          </a>
+          {% endif %}
+        {% endfor %}
+      </aside>
+      <article>
+        {{ contents }}
+      </article>
+    </section>
+    <script type="text/javascript" src="{{rootPath}}js/highlight.pack.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+      $(function(){
+      	$('.toggle_section').on('click', function(ev) {
+          $(ev.currentTarget).parent('li').toggleClass('open');
+        });
+      });
+
+    </script>
+  </body>
+</html>
