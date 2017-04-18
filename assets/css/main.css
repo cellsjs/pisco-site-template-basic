@@ -484,14 +484,19 @@ a {
 			color: #8da273;
 			text-decoration: underline;
 		}
+			.docs article a:hover {
+				text-decoration: none;
+			}
 
 		.docs article ul {
 			margin: 15px 0 15px 16px;
 			list-style: circle;
 		}
-			.docs article a:hover {
-				text-decoration: none;
-			}
+
+		.docs article ol {
+			margin: 15px 0 15px 16px;
+			list-style: decimal;
+		}
 
 
 	.docs .docs-main-content {
