@@ -36,10 +36,10 @@
             </li>
 
             <li>
-              <h4>Guides</h4>
+              <h4>Tutorials</h4>
               <ul>
               {% for section in target.children %}
-                {% if section.name == "guides" %}
+                {% if section.name == "tutorials" %}
                   {% for document in section.children %}
                   <li>
                     {% if document.file.nav_path == nav_path %}
@@ -55,10 +55,10 @@
             </li>
 
             <li>
-              <h4>Tutorials</h4>
+              <h4>Guides</h4>
               <ul>
               {% for section in target.children %}
-                {% if section.name == "tutorials" %}
+                {% if section.name == "guides" %}
                   {% for document in section.children %}
                   <li>
                     {% if document.file.nav_path == nav_path %}
